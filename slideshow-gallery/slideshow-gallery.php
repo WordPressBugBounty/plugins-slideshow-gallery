@@ -5,7 +5,7 @@ Plugin URI: https://tribulant.com/plugins/view/13/
 Author: Tribulant
 Author URI: https://tribulant.com
 Description: Feature content in a JavaScript powered slideshow gallery showcase on your WordPress website. The slideshow is flexible and all aspects can easily be configured. Embedding or hardcoding the slideshow gallery is a breeze. See the <a href="https://tribulant.com/docs/wordpress-slideshow-gallery/1758/" target="_blank">online documentation</a> for instructions on using and embedding slideshow galleries. Upgrade to the premium version to remove all limitations.
-Version: 1.8.3
+Version: 1.8.4
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: slideshow gallery, slideshow, gallery, slider, jquery, bfithumb, galleries, photos, images
@@ -72,7 +72,8 @@ if (!class_exists('SlideshowGallery')) {
 			$this -> add_filter("plugin_action_links_" . $this -> plugin_file, 'plugin_action_links', 10, 4);
 			
 			$this -> add_action('slideshow_ratereviewhook', 'ratereview_hook');
-			
+			$this ->add_action( 'wp_ajax_slideshow_dismiss_smart_rating', 'dismiss_slideshow_smart_rating' );
+
 			if (!is_admin() || wp_doing_ajax()) { 
 				add_shortcode('slideshow', array($this, 'embed')); 
 				add_shortcode('tribulant_slideshow', array($this, 'embed'));
@@ -354,8 +355,25 @@ if (!class_exists('SlideshowGallery')) {
 			
 			$this -> render('settings-submitserial', array('success' => $success, 'errors' => $errors), true, 'admin');
 		}
-		
+
+		function dismiss_slideshow_smart_rating() {
+			$nonce = isset($_POST['nonce']) ? $_POST['nonce'] : '';
+			$action = 'slideshow_feedback_notification_bar_nonce';
+
+			if (!wp_verify_nonce($nonce, $action)) {
+				wp_send_json_error();
+			}
+
+			if ( false === get_option( 'slideshow_smart_rating_dismissed' ) && false === update_option( 'slideshow_smart_rating_dismissed', false ) ) {
+				add_option( 'slideshow_smart_rating_dismissed', true );
+			}
+			wp_send_json_success();
+		}
+				
 		function admin_notices() {
+			if ( get_option( 'slideshow_smart_rating_dismissed', false ) ) {
+				return;
+			}
 			
 			if (is_admin()) {			
 				$this -> check_uploaddir();
@@ -367,16 +385,30 @@ if (!class_exists('SlideshowGallery')) {
 				}
 				
 				$showmessage_ratereview = $this -> get_option('showmessage_ratereview');
+
 				if (!empty($showmessage_ratereview)) {
-					$message = sprintf(esc_html__('You have been using the %s for %s days or more. Please consider to %s it or say it %s on %s.', 'slideshow-gallery'), 
+					$nonce = wp_create_nonce( 'slideshow_feedback_notification_bar_nonce' );
+	
+					$message = sprintf(esc_html__('You have been using the %s for %s days or more. Please consider to %s it or say it %s on %s. %s', 'slideshow-gallery'), 
 					'<a href="https://wordpress.org/plugins/slideshow-gallery/" target="_blank">Tribulant Slideshow Gallery plugin</a>',
 					$showmessage_ratereview,
 					'<a class="button" href="https://wordpress.org/support/plugin/slideshow-gallery/reviews/?rate=5#new-post" target="_blank"><i class="fa fa-star"></i> Rate</a>',
 					'<a class="button" href="https://wordpress.org/plugins/slideshow-gallery/?compatibility[version]=' . get_bloginfo('version') . '&compatibility[topic_version]=' . $this -> version . '&compatibility[compatible]=1" target="_blank"><i class="fa fa-check"></i> Works</a>',
-					'<a href="https://wordpress.org/plugins/slideshow-gallery/" target="_blank">WordPress.org</a>');
+					'<a href="https://wordpress.org/plugins/slideshow-gallery/" target="_blank">WordPress.org</a>',
+					'<button type="button" class="button slideshow-my-custom-dismiss-button" data-nonce="' . $nonce .'">' . __('Dismiss forever', 'slideshow-gallery') . '</button>');
 					
 					$dismissable = admin_url('admin.php?page=' . $this -> sections -> settings . '&slideshow_method=hidemessage&message=ratereview');
 					$this -> render_msg($message, $dismissable, false);
+					?>
+					<script type="text/javascript">
+						jQuery('.slideshow-my-custom-dismiss-button').on('click', function(e) {
+							e.preventDefault();
+						var nonce =jQuery(this).attr('data-nonce');
+						jQuery.post(ajaxurl,{action:'slideshow_dismiss_smart_rating',nonce:nonce})
+							jQuery('.slideshow.notice').hide();
+						});
+						</script>
+					<?php
 				}
 				
 				/* Serial key submission message */
@@ -528,7 +560,7 @@ if (!class_exists('SlideshowGallery')) {
 		        }
 		    }
 		    
-            if (!in_array($s['orderby'], ['id', 'date', 'name', 'type', 'created' , 'order'], true)) {
+            if (!in_array($s['orderby'], ['id', 'date', 'name', 'type', 'created' , 'order' , 'random'], true)) {
                 $s['orderby'] = array('order', "ASC"); // Default fallback
             }
 

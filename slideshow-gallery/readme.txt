@@ -3,8 +3,8 @@ Contributors: contrid
 Donate link: https://tribulant.com/
 Tags: wordpress plugins, wordpress slideshow gallery, slides, slideshow, image gallery, images, gallery, featured content, content gallery, javascript, javascript slideshow, slideshow gallery
 Requires at least: 3.1
-Tested up to: 6.6.1
-Stable tag: 1.8.3
+Tested up to: 6.6.2
+Stable tag: 1.8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -190,9 +190,14 @@ There is an "Images Tester" utility under Slideshow > Settings on the right-hand
 
 See all <a href="https://tribulant.com/docs/wordpress-slideshow-gallery/1758/#doc3">releases and full changelogs</a> in our docs.
 
+= 1.8.4 =
+* ADD: "Dismiss forever" button on the admin area rating notice to dismiss it forever.
+* FIX: Order slides by random (orderby="random") was not working.
+* FIX: XSS vulnerability.
+
 = 1.8.3 =
-* FIX: Cannot order slides after previous vulnerability fix.
 * IMPROVE: PHP 8.2 and 8.3 compatibility.
+* FIX: Cannot order slides after previous vulnerability fix.
 
 = 1.8.2 =
 * FIX: Vulnerability SQL injection on shortcode gallery.
