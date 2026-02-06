@@ -5,7 +5,7 @@ Plugin URI: https://tribulant.com/plugins/view/13/
 Author: Tribulant
 Author URI: https://tribulant.com
 Description: Feature content in a JavaScript powered slideshow gallery showcase on your WordPress website. The slideshow is flexible and all aspects can easily be configured. Embedding or hardcoding the slideshow gallery is a breeze. See the <a href="https://tribulant.com/docs/wordpress-slideshow-gallery/1758/" target="_blank">online documentation</a> for instructions on using and embedding slideshow galleries. Upgrade to the premium version to remove all limitations.
-Version: 1.8.4
+Version: 1.8.5
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: slideshow gallery, slideshow, gallery, slider, jquery, bfithumb, galleries, photos, images
@@ -37,6 +37,7 @@ if (!class_exists('SlideshowGallery')) {
 		public $Html;
 		public $Form;
 		public $errorhandler;
+		public $message;
 		
 		function __construct() {		
 			$url = explode("&", $_SERVER['REQUEST_URI']);
@@ -227,8 +228,6 @@ if (!class_exists('SlideshowGallery')) {
 				$this -> sections -> about,
 				array($this, 'slideshow_gallery_about')
 			);
-			
-			remove_submenu_page('index.php', $this -> sections -> about);
 		}
 		
 		function set_screen_option($status = null, $option = null, $value = null) {			
@@ -1303,6 +1302,7 @@ if (!function_exists('SG')) {
 		return new SlideshowGallery($param);
 	}
 }
+
 
 //initialize a Gallery object
 global $Gallery;

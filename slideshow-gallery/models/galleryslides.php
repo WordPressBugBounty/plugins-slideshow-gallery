@@ -11,6 +11,13 @@ class GalleryGallerySlides extends GalleryDbHelper {
 	var $data = array();
 	var $errors = array();
 	
+	public $gallery_id;
+	public $slide_id;
+	public $order;
+	public $created;
+	public $modified;
+
+
 	var $fields = array(
 		'id'				=>	"INT(11) NOT NULL AUTO_INCREMENT",
 		'gallery_id'		=>	"INT(11) NOT NULL DEFAULT '0'",

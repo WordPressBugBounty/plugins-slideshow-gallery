@@ -40,7 +40,7 @@ TINY.slideshow.prototype={
 			a.d= tag('p',h)[0].innerHTML;
 			a.l= tag('a',h)[0]? tag('a',h)[0].href:'';
 			a.tg = tag('a',h)[0] != '' ? tag('a',h)[0].target:'_self';
-			a.p= tag('span',h)[0].innerHTML;
+			a.p = tag('span', h)[0].innerHTML.replace(/\u00D7/g, 'x');
 			a.a = jQuery(tag('span',h)[0]).data('alt');
 			if(this.thumbs){
 				var g = tag('img',h)[0];

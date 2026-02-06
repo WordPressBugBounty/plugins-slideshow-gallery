@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 class GalleryPlugin extends GalleryCheckinit {
 
-	var $version = '1.8.4';
+	var $version = '1.8.5';
 	var $plugin_name;
 	var $plugin_base;
 	var $pre = 'Gallery'; 
@@ -517,13 +517,15 @@ class GalleryPlugin extends GalleryCheckinit {
 	}
 
 	function render_msg($message = null, $dismissable = null, $escape = true) {
-		if (!empty($escape)) { $message = wp_kses_post($message); }
-		$this -> render('msg-top', array('message' => $message, 'dismissable' => $dismissable), true, 'admin');
+		$message = ($message === null) ? '' : $message;
+		$this -> message = $message;
+		$this -> render('msg-top', array('message' => $message, 'dismissable' => $dismissable, 'escape' => $escape), true, 'admin');
 	}
 
 	function render_err($message = null, $dismissable = null, $escape = true) {
-		if (!empty($escape)) { $message = wp_kses_post($message); }
-		$this -> render('err-top', array('message' => $message, 'dismissable' => $dismissable), true, 'admin');
+		$message = ($message === null) ? '' : $message;
+		$this -> message = $message;
+		$this -> render('err-top', array('message' => $message, 'dismissable' => $dismissable, 'escape' => $escape), true, 'admin');
 	}
 
 	function redirect($location = null, $msgtype = null, $message = null, $action = null) {
@@ -902,7 +904,10 @@ class GalleryPlugin extends GalleryCheckinit {
 				}
 
 				if (!empty($this -> table_query)) {
-					require_once(ABSPATH . 'wp-admin' . DS . 'upgrade-functions.php');
+					if (!function_exists('dbDelta')) {
+						require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+					}
+
 					dbDelta($this -> table_query, true);
 				}
 			}
@@ -1453,7 +1458,7 @@ class GalleryPlugin extends GalleryCheckinit {
 		return $text;
 	}
 
-	function language_split($text, $quicktags = true, array $languageMap = NULL) {
+	function language_split($text, $quicktags = true, ?array $languageMap = NULL) {
 		$array = false;
 
 		if (!empty($text)) {

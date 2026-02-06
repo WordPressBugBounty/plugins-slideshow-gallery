@@ -439,3 +439,9 @@ span.gallery_slides_convert_grid a{
 body .ui-tooltip {
 	border-width: 2px;
 }
+
+/* Hide the “About” submenu entry in the admin menu */
+#adminmenu a[href="index.php?page=slideshow-gallery-about"],
+#adminmenu .wp-submenu a[href="index.php?page=slideshow-gallery-about"] {
+    display: none !important;
+}

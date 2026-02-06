@@ -230,8 +230,8 @@ class Slide_List_Table extends WP_List_Table {
 				
 		$current_action = $this -> current_action();
         if (!empty($current_action)) {
-	        $slides = map_deep($_REQUEST['slides'], 'sanitize_text_field');
-	        $galleries = map_deep($_REQUEST['galleries'], 'sanitize_text_field');
+	        $slides = ! empty($_REQUEST['slides']) ? map_deep($_REQUEST['slides'], 'sanitize_text_field') : [];
+	        $galleries = ! empty($_REQUEST['galleries']) ? map_deep($_REQUEST['galleries'], 'sanitize_text_field') : [];
 	        
 	        if (!empty($slides)) {
 		        //Detect when a bulk action is being triggered...      

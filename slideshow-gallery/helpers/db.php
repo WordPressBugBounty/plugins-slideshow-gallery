@@ -333,7 +333,8 @@ class GalleryDbHelper extends GalleryPlugin {
 	function delete_all($conditions = null) {
 		global $wpdb;
 		
-		$query = "DELETE FROM %s ";
+		$table = $this -> {$this -> model}() -> table;
+		$query = "DELETE FROM `$table`";
 		
 		if (!empty($conditions)) {
 			$query .= " WHERE";
@@ -347,8 +348,7 @@ class GalleryDbHelper extends GalleryPlugin {
 				$c++;
 			}
 		}
-		$sql = $wpdb->prepare( $query, $this -> {$this -> model}() -> table);
-		$result =  $wpdb->get_results( $sql , ARRAY_A );
+		$wpdb->query($query);
 		return true;
 	}
 	

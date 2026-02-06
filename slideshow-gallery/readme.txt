@@ -3,8 +3,8 @@ Contributors: contrid
 Donate link: https://tribulant.com/
 Tags: wordpress plugins, wordpress slideshow gallery, slides, slideshow, image gallery, images, gallery, featured content, content gallery, javascript, javascript slideshow, slideshow gallery
 Requires at least: 3.1
-Tested up to: 6.6.2
-Stable tag: 1.8.4
+Tested up to: 6.8.3
+Stable tag: 1.8.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -189,6 +189,11 @@ There is an "Images Tester" utility under Slideshow > Settings on the right-hand
 == Changelog ==
 
 See all <a href="https://tribulant.com/docs/wordpress-slideshow-gallery/1758/#doc3">releases and full changelogs</a> in our docs.
+
+= 1.8.5 =
+* IMPROVE: Responsive images are able to get resized now.
+* IMPROVE: PHP 8.4 compatibility.
+* FIX: Slow loading of slideshow images.
 
 = 1.8.4 =
 * ADD: "Dismiss forever" button on the admin area rating notice to dismiss it forever.

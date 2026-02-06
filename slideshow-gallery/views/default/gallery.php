@@ -24,7 +24,7 @@ $thumbopacity = $this -> get_option('thumbopacity');
 					$full_image_url = wp_get_attachment_url($slide -> ID); 
 					
 					?>										
-					<?php if ($options['layout'] != "responsive" && $options['resizeimages'] == "true" && $options['width'] != "auto") : ?>
+					<?php if ( $options['resizeimages'] == "true" && $options['width'] != "auto") : ?>
 						<span data-alt="<?php echo esc_attr($this -> Html() -> sanitize($slide -> post_title)); ?>"><?php echo esc_html($this -> Html -> otf_image_src($slide, $options['width'], $options['height'], 100)); ?></span>
 					<?php else : ?>
 						<span data-alt="<?php echo esc_attr($this -> Html() -> sanitize($slide -> post_title)); ?>"><?php echo esc_html($full_image_href[0]); ?></span>
@@ -53,7 +53,7 @@ $thumbopacity = $this -> get_option('thumbopacity');
 					<h3 style="opacity:70;"><a target="_self" href="<?php echo get_permalink($slide -> ID); ?>"><?php echo wp_unslash(esc_html($slide -> post_title)); ?></a></h3>
 					<?php $full_image_href = wp_get_attachment_image_src(get_post_thumbnail_id($slide -> ID), 'full', false); ?>
 					<?php $full_image_url = wp_get_attachment_url(get_post_thumbnail_id($slide -> ID)); ?>										
-					<?php if ($options['layout'] != "responsive" && $options['resizeimages'] == "true" && $options['width'] != "auto") : ?>
+					<?php if ( $options['resizeimages'] == "true" && $options['width'] != "auto") : ?>
 						<span data-alt="<?php echo esc_attr($this -> Html() -> sanitize($slide -> post_title)); ?>"><?php echo esc_html($this -> Html -> otf_image_src($slide, $options['width'], $options['height'], 100)); ?></span>
 					<?php else : ?>
 						<span data-alt="<?php echo esc_attr($this -> Html() -> sanitize($slide -> post_title)); ?>"><?php echo esc_html($full_image_href[0]); ?></span>
@@ -77,7 +77,7 @@ $thumbopacity = $this -> get_option('thumbopacity');
 			<?php foreach ($slides as $slide) : ?>
 				<li>
 					<h3 style="opacity:70;"><?php echo wp_unslash(esc_html($slide -> title)); ?></h3>
-					<?php if ($options['layout'] != "responsive" && $options['resizeimages'] == "true" && $options['width'] != "auto") : ?>
+					<?php if ( $options['resizeimages'] == "true" && $options['width'] != "auto") : ?>
 						<span data-alt="<?php echo esc_attr($this -> Html() -> sanitize($slide -> title)); ?>"><?php echo esc_html($this -> Html -> otf_image_src($slide, $options['width'], $options['height'], 100)); ?></span>
 					<?php else : ?>
 						<span data-alt="<?php echo esc_attr($this -> Html() -> sanitize($slide -> title)); ?>"><?php echo site_url() . '/' . $slide -> image_url; ?></span>
@@ -99,7 +99,7 @@ $thumbopacity = $this -> get_option('thumbopacity');
 			<?php foreach ($slides as $slide) : ?>				
 				<li>
 					<h3 style="opacity:<?php echo (!empty($slide -> iopacity)) ? ($slide -> iopacity) : 70; ?>;"><?php echo (!empty($slide -> showinfo) && ($slide -> showinfo == "both" || $slide -> showinfo == "title")) ? esc_html($slide -> title) : ''; ?></h3>
-					<?php if ($options['layout'] != "responsive" && $options['resizeimages'] == "true" && $options['width'] != "auto") : ?>
+					<?php if ( $options['resizeimages'] == "true" && $options['width'] != "auto") : ?>
 						<span data-alt="<?php echo esc_attr($this -> Html() -> sanitize($slide -> title)); ?>"><?php echo esc_html($this -> Html -> otf_image_src($slide, $options['width'], $options['height'], 100)); ?></span>
 					<?php else : ?>
 						<span data-alt="<?php echo esc_attr($this -> Html() -> sanitize($slide -> title)); ?>"><?php echo esc_html($slide -> image_path); ?></span>

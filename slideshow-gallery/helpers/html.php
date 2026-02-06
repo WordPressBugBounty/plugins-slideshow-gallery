@@ -220,14 +220,16 @@ class GalleryHtmlHelper extends GalleryPlugin {
 	function otf_image_src($slide = null, $width = null, $height = null, $quality = 100) {
 		$objectname = get_class($slide);
 
-		if (!empty($slide -> attachment_id) && wp_get_attachment_image_src($slide -> attachment_id)) {						
-			$image_src = wp_get_attachment_image_src($slide -> attachment_id, array($width, $height), false);			
-			return $image_src[0];
-		} elseif (!empty($objectname) && $objectname == "WP_Post" && !empty($slide -> ID)) {			
-			$image_src = wp_get_attachment_image_src($slide -> ID, array($width, $height), false);
-			return $image_src[0];
+		// For attachments or WP_Post: Get the FULL original image URL, then resize/cache via BFI_Thumb
+		if (!empty($slide -> attachment_id) && wp_get_attachment_image_src($slide -> attachment_id, 'full')) {                        
+			$full_src = wp_get_attachment_image_src($slide -> attachment_id, 'full');
+			return $this -> bfithumb_image_src($full_src[0], $width, $height, $quality);
+		} elseif (!empty($objectname) && $objectname == "WP_Post" && !empty($slide -> ID)) {            
+			$full_src = wp_get_attachment_image_src($slide -> ID, 'full');
+			return $this -> bfithumb_image_src($full_src[0], $width, $height, $quality);
 		}
 
+		// Fallback for non-attachments (unchanged)
 		return $this -> bfithumb_image_src($slide -> image_path, $width, $height, $quality);
 	}
 
