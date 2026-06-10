@@ -63,7 +63,11 @@ if (is_object($this->Gallery()->data)) {
 				<i class="fa fa-check fa-fw"></i> <?php _e('Save Gallery', 'slideshow-gallery'); ?>
 			</button>
 			<div class="slideshow_continueediting">
-				<label><input <?php echo (!empty($_REQUEST['continueediting'])) ? 'checked="checked"' : ''; ?> type="checkbox" name="continueediting" value="1" id="continueediting" /> <?php _e('Continue editing', 'slideshow-gallery'); ?></label>
+				<label class="slideshow-custom-checkbox">
+					<input <?php echo (!empty($_REQUEST['continueediting'])) ? 'checked="checked"' : ''; ?> type="checkbox" name="continueediting" value="1" id="continueediting" />
+					<span class="check-icon"></span>
+					<?php _e('Continue editing', 'slideshow-gallery'); ?>
+				</label>
 			</div>
 		</p>
 	</form>

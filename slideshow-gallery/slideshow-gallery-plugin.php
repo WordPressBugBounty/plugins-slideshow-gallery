@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 class GalleryPlugin extends GalleryCheckinit {
 
-	var $version = '1.8.5';
+	var $version = '1.8.6';
 	var $plugin_name;
 	var $plugin_base;
 	var $pre = 'Gallery'; 

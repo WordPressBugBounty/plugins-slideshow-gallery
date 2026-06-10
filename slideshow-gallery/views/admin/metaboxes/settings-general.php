@@ -81,8 +81,14 @@ $thumbhideonmobile = $this -> get_option ('thumbhideonmobile');
 			<tr>
 				<th><label for="slide_direction_lr"><?php _e('Slide Direction', 'slideshow-gallery'); ?></label></th>
 				<td>
-					<label><input <?php echo (!empty($slide_direction) && $slide_direction == "lr") ? 'checked="checked"' : ''; ?> type="radio" name="slide_direction" value="lr" id="slide_direction_lr" /> <?php _e('Left/Right', 'slideshow-gallery'); ?></label>
-					<label><input <?php echo (!empty($slide_direction) && $slide_direction == "tb") ? 'checked="checked"' : ''; ?> type="radio" name="slide_direction" value="tb" id="slide_direction_tb" /> <?php _e('Top/Bottom', 'slideshow-gallery'); ?></label>
+					<label class="slideshow-custom-radio">
+						<input <?php echo (!empty($slide_direction) && $slide_direction == "lr") ? 'checked="checked"' : ''; ?> type="radio" name="slide_direction" value="lr" id="slide_direction_lr" />
+						<span><?php _e('Left/Right', 'slideshow-gallery'); ?></span>
+					</label>
+					<label class="slideshow-custom-radio">
+						<input <?php echo (!empty($slide_direction) && $slide_direction == "tb") ? 'checked="checked"' : ''; ?> type="radio" name="slide_direction" value="tb" id="slide_direction_tb" />
+						<span><?php _e('Top/Bottom', 'slideshow-gallery'); ?></span>
+					</label>
 				</td>
 			</tr>
 		</tbody>
@@ -150,8 +156,14 @@ $thumbhideonmobile = $this -> get_option ('thumbhideonmobile');
 			<th><label for="autoslideY"><?php _e('Auto Slide', 'slideshow-gallery'); ?></label>
 			<?php echo $this -> Html -> help(__('Turn this on so that the slideshow can automatically slide through the slides.<br/><br/><strong>Override per slideshow:</strong> Using parameter <code>auto</code> with value <code>true</code> or <code>false</code> eg. <code>[tribulant_slideshow auto="false"]</code>.', 'slideshow-gallery')); ?></th>
 			<td>
-				<label><input onclick="jQuery('#autoslide_div').show();" <?php echo ($this -> get_option('autoslide') == "Y") ? 'checked="checked"' : ''; ?> type="radio" name="autoslide" value="Y" id="autoslideY" /> <?php _e('Yes', 'slideshow-gallery'); ?></label>
-				<label><input onclick="jQuery('#autoslide_div').hide();" <?php echo ($this -> get_option('autoslide') == "N") ? 'checked="checked"' : ''; ?> type="radio" name="autoslide" value="N" id="autoslideN" /> <?php _e('No', 'slideshow-gallery'); ?></label>
+				<label class="slideshow-custom-radio">
+					<input onclick="jQuery('#autoslide_div').show();" <?php echo ($this -> get_option('autoslide') == "Y") ? 'checked="checked"' : ''; ?> type="radio" name="autoslide" value="Y" id="autoslideY" />
+					<span><?php _e('Yes', 'slideshow-gallery'); ?></span>
+				</label>
+				<label class="slideshow-custom-radio">
+					<input onclick="jQuery('#autoslide_div').hide();" <?php echo ($this -> get_option('autoslide') == "N") ? 'checked="checked"' : ''; ?> type="radio" name="autoslide" value="N" id="autoslideN" />
+					<span><?php _e('No', 'slideshow-gallery'); ?></span>
+				</label>
 				<span class="howto"><?php _e('Should image slides automatically slide?', 'slideshow-gallery'); ?></span>
 			</td>
 		</tr>
@@ -165,8 +177,14 @@ $thumbhideonmobile = $this -> get_option ('thumbhideonmobile');
 				<th><label for="alwaysauto_true"><?php _e('Always Auto', 'slideshow-gallery'); ?></label>
 				<?php echo $this -> Html -> help(__('With the "Auto Slide" setting turned on above, the slideshow will automatically go through the slides but it will stop automatically navigating once the user started navigating. You can override this behaviour and force automatic navigation by turning this on.', 'slideshow-gallery')); ?></th>
 				<td>
-					<label><input <?php echo ($this -> get_option('alwaysauto') == "true") ? 'checked="checked"' : ''; ?> type="radio" name="alwaysauto" value="true" id="alwaysauto_true" /> <?php _e('Yes', 'slideshow-gallery'); ?></label>
-					<label><input <?php echo ($this -> get_option('alwaysauto') == "false") ? 'checked="checked"' : ''; ?> type="radio" name="alwaysauto" value="false" id="alwaysauto_false" /> <?php _e('No', 'slideshow-gallery'); ?></label>
+					<label class="slideshow-custom-radio">
+						<input <?php echo ($this -> get_option('alwaysauto') == "true") ? 'checked="checked"' : ''; ?> type="radio" name="alwaysauto" value="true" id="alwaysauto_true" />
+						<span><?php _e('Yes', 'slideshow-gallery'); ?></span>
+					</label>
+					<label class="slideshow-custom-radio">
+						<input <?php echo ($this -> get_option('alwaysauto') == "false") ? 'checked="checked"' : ''; ?> type="radio" name="alwaysauto" value="false" id="alwaysauto_false" />
+						<span><?php _e('No', 'slideshow-gallery'); ?></span>
+					</label>
 					<span class="howto"><?php _e('Should the slideshow always continue auto sliding, even after navigation by the user?', 'slideshow-gallery'); ?></span>
 				</td>
 			</tr>
@@ -232,8 +250,14 @@ $thumbhideonmobile = $this -> get_option ('thumbhideonmobile');
 			<th><label for="shownav_Y"><?php _e('Show Image Navigation', 'slideshow-gallery'); ?></label>
 			<?php echo $this -> Html -> help(__('Turn this on to show the Next and Previous arrows on either sides of the slideshow for the user to navigate through slides. Once turned on, you can set the opacity of these navigation arrows below.', 'slideshow-gallery')); ?></th>
 			<td>
-				<label><input <?php echo ($this -> get_option('shownav') == "Y") ? 'checked="checked"' : ''; ?> onclick="jQuery('#shownavdiv').show();" type="radio" name="shownav" value="Y" id="shownav_Y" /> <?php _e('Yes', 'slideshow-gallery'); ?></label>
-				<label><input <?php echo ($this -> get_option('shownav') == "N") ? 'checked="checked"' : ''; ?> onclick="jQuery('#shownavdiv').hide();" type="radio" name="shownav" value="N" id="shownav_N" /> <?php _e('No', 'slideshow-gallery'); ?></label>
+				<label class="slideshow-custom-radio">
+					<input <?php echo ($this -> get_option('shownav') == "Y") ? 'checked="checked"' : ''; ?> onclick="jQuery('#shownavdiv').show();" type="radio" name="shownav" value="Y" id="shownav_Y" />
+					<span><?php _e('Yes', 'slideshow-gallery'); ?></span>
+				</label>
+				<label class="slideshow-custom-radio">
+					<input <?php echo ($this -> get_option('shownav') == "N") ? 'checked="checked"' : ''; ?> onclick="jQuery('#shownavdiv').hide();" type="radio" name="shownav" value="N" id="shownav_N" />
+					<span><?php _e('No', 'slideshow-gallery'); ?></span>
+				</label>
 				<span class="howto"><?php _e('Show next/previous buttons on the image for navigation purposes?', 'slideshow-gallery'); ?></span>
 			</td>
 		</tr>
@@ -302,8 +326,14 @@ $thumbhideonmobile = $this -> get_option ('thumbhideonmobile');
 			<th><label for="informationY"><?php _e('Show Information', 'slideshow-gallery'); ?></label>
 			<?php echo $this -> Html -> help(__('Should the information bar be shown on slides? Turn this on to show a bar on each slide with the title and description of the slide.', 'slideshow-gallery')); ?></th>
 			<td>
-				<label><input onclick="jQuery('#information_div').show();" <?php echo ($this -> get_option('information') == "Y") ? 'checked="checked"' : ''; ?> type="radio" name="information" value="Y" id="informationY" /> <?php _e('Yes', 'slideshow-gallery'); ?></label>
-				<label><input onclick="jQuery('#information_div').hide();" <?php echo ($this -> get_option('information') == "N") ? 'checked="checked"' : ''; ?> type="radio" name="information" value="N" id="informationN" /> <?php _e('No', 'slideshow-gallery'); ?></label>
+				<label class="slideshow-custom-radio">
+					<input onclick="jQuery('#information_div').show();" <?php echo ($this -> get_option('information') == "Y") ? 'checked="checked"' : ''; ?> type="radio" name="information" value="Y" id="informationY" />
+					<span><?php _e('Yes', 'slideshow-gallery'); ?></span>
+				</label>
+				<label class="slideshow-custom-radio">
+					<input onclick="jQuery('#information_div').hide();" <?php echo ($this -> get_option('information') == "N") ? 'checked="checked"' : ''; ?> type="radio" name="information" value="N" id="informationN" />
+					<span><?php _e('No', 'slideshow-gallery'); ?></span>
+				</label>
 				<span class="howto"><?php _e('Should the information bar be shown on slides?', 'slideshow-gallery'); ?></span>
 			</td>
 		</tr>
@@ -317,8 +347,14 @@ $thumbhideonmobile = $this -> get_option ('thumbhideonmobile');
 				<th><label for="infopositionbottom"><?php _e('Information Bar Position', 'slideshow-gallery'); ?></label>
 				<?php echo $this -> Html -> help(__('With the Information Bar turned on with the setting above, you can now specify the position of the information bar. Either above or below the slideshow is available.', 'slideshow-gallery')); ?></th>
 				<td>
-					<label><input <?php echo ($this -> get_option('infoposition') == "top") ? 'checked="checked"' : ''; ?> type="radio" name="infoposition" value="top" id="infopositiontop" /> <?php _e('Top', 'slideshow-gallery'); ?></label>
-					<label><input <?php echo ($this -> get_option('infoposition') == "bottom") ? 'checked="checked"' : ''; ?> type="radio" name="infoposition" value="bottom" id="infopositionbottom" /> <?php _e('Bottom', 'slideshow-gallery'); ?></label>
+					<label class="slideshow-custom-radio">
+						<input <?php echo ($this -> get_option('infoposition') == "top") ? 'checked="checked"' : ''; ?> type="radio" name="infoposition" value="top" id="infopositiontop" />
+						<span><?php _e('Top', 'slideshow-gallery'); ?></span>
+					</label>
+					<label class="slideshow-custom-radio">
+						<input <?php echo ($this -> get_option('infoposition') == "bottom") ? 'checked="checked"' : ''; ?> type="radio" name="infoposition" value="bottom" id="infopositionbottom" />
+						<span><?php _e('Bottom', 'slideshow-gallery'); ?></span>
+					</label>
 					<span class="howto"><?php _e('Choose your preferred position of the information bar relative to the slideshow.', 'slideshow-gallery'); ?></span>
 				</td>
 			</tr>
@@ -333,7 +369,11 @@ $thumbhideonmobile = $this -> get_option ('thumbhideonmobile');
 				<th><label for="infoonhover"><?php _e('Show Only On Hover', 'slideshow-gallery'); ?></label>
 				<?php echo $this -> Html -> help(__('Checking this option will only show the information bar on hover', 'slideshow-gallery')); ?></th>
 				<td>
-					<label><input onclick="if (jQuery(this).is(':checked')) { jQuery('#infoonhover_div').hide(); } else { jQuery('#infoonhover_div').show(); }" <?php echo (!empty($infoonhover)) ? 'checked="checked"' : ''; ?> type="checkbox" name="infoonhover" value="1" id="infoonhover" /> <?php _e('Yes, only show the info bar on hover', 'slideshow-gallery'); ?></label>
+					<label class="slideshow-custom-checkbox">
+						<input onclick="if (jQuery(this).is(':checked')) { jQuery('#infoonhover_div').hide(); } else { jQuery('#infoonhover_div').show(); }" <?php echo (!empty($infoonhover)) ? 'checked="checked"' : ''; ?> type="checkbox" name="infoonhover" value="1" id="infoonhover" />
+						<span class="check-icon"></span>
+						<?php _e('Yes, only show the info bar on hover', 'slideshow-gallery'); ?>
+					</label>
 					<span class="howto"><?php _e('Tick/check this to only show the information bar on hover.', 'slideshow-gallery'); ?></span>
 				</td>
 			</tr>
@@ -354,7 +394,11 @@ $thumbhideonmobile = $this -> get_option ('thumbhideonmobile');
 					<th><label for="infofade"><?php _e('Fade Information Bar', 'slideshow-gallery'); ?></label>
 					<?php echo $this -> Html -> help(__('Fade the information bar after a few seconds.', 'slideshow-gallery')); ?></th>
 					<td>
-						<label><input <?php echo (!empty($infofade)) ? 'checked="checked"' : ''; ?> onclick="if (jQuery(this).is(':checked')) { jQuery('#informationfade_div').show(); } else { jQuery('#informationfade_div').hide(); }"type="checkbox" name="infofade" value="1" id="infofade" /> <?php _e('Yes, fade the information bar', 'slideshow-gallery'); ?></label>
+						<label class="slideshow-custom-checkbox">
+							<input <?php echo (!empty($infofade)) ? 'checked="checked"' : ''; ?> onclick="if (jQuery(this).is(':checked')) { jQuery('#informationfade_div').show(); } else { jQuery('#informationfade_div').hide(); }"type="checkbox" name="infofade" value="1" id="infofade" />
+							<span class="check-icon"></span>
+							<?php _e('Yes, fade the information bar', 'slideshow-gallery'); ?>
+						</label>
 						<span class="howto"><?php _e('Do you want the information bar to fade?', 'slideshow-gallery'); ?></span>
 					</td>
 				</tr>
@@ -405,7 +449,11 @@ $thumbhideonmobile = $this -> get_option ('thumbhideonmobile');
 				<th><label for="infohideonmobile"><?php _e('Hide On Mobiles', 'slideshow-gallery'); ?></label>
 				<?php echo $this -> Html -> help(__('With a responsive layout turned on, the slideshow will respond in width on mobile devices and the information bar tends to overlap the entire slide since it increases in height as it reduces in width. You can tick/check this setting to hide the information bar on mobile devices so that the slides remain fully visible.', 'slideshow-gallery')); ?></th>
 				<td>
-					<label><input <?php echo (!$this -> ci_serial_valid()) ? 'disabled="disabled"' : ''; ?> <?php echo (!empty($infohideonmobile) && $this -> ci_serial_valid()) ? 'checked="checked"' : ''; ?> type="checkbox" name="infohideonmobile" value="1" id="infohideonmobile" /> <?php _e('Yes, hide the information bar on mobiles', 'slideshow-gallery'); ?> <?php if (!$this -> ci_serial_valid()) { echo sprintf(__('(%s)', 'slideshow-gallery'), '<a href="' . admin_url('admin.php?page=' . $this -> sections -> lite_upgrade) . '">' . __('Pro Version Only', 'slideshow-gallery') . '</a>'); } ?></label>
+					<label class="slideshow-custom-checkbox">
+						<input <?php echo (!$this -> ci_serial_valid()) ? 'disabled="disabled"' : ''; ?> <?php echo (!empty($infohideonmobile) && $this -> ci_serial_valid()) ? 'checked="checked"' : ''; ?> type="checkbox" name="infohideonmobile" value="1" id="infohideonmobile" />
+						<span class="check-icon"></span>
+						<?php _e('Yes, hide the information bar on mobiles', 'slideshow-gallery'); ?> <?php if (!$this -> ci_serial_valid()) { echo sprintf(__('(%s)', 'slideshow-gallery'), '<a href="' . admin_url('admin.php?page=' . $this -> sections -> lite_upgrade) . '">' . __('Pro Version Only', 'slideshow-gallery') . '</a>'); } ?>
+					</label>
 					<span class="howto"><?php _e('Tick/check this to hide the information bar on mobiles', 'slideshow-gallery'); ?></span>
 				</td>
 			</tr>
@@ -421,8 +469,14 @@ $thumbhideonmobile = $this -> get_option ('thumbhideonmobile');
 			<th><label for="thumbnailsN"><?php _e('Show Thumbnails', 'slideshow-gallery'); ?></label>
 			<?php echo $this -> Html -> help(__('Would you like to show a thumbnail bar/slider above/below the slideshow with the thumbnails of all the slides in the slideshow for easier navigation?', 'slideshow-gallery')); ?></th>
 			<td>
-				<label><input onclick="jQuery('#thumbnails_div').show();" <?php echo ($this -> get_option('thumbnails') == "Y") ? 'checked="checked"' : ''; ?> type="radio" name="thumbnails" value="Y" id="thumbnailsY" /> <?php _e('Yes', 'slideshow-gallery'); ?></label>
-				<label><input onclick="jQuery('#thumbnails_div').hide();" <?php echo ($this -> get_option('thumbnails') == "N") ? 'checked="checked"' : ''; ?> type="radio" name="thumbnails" value="N" id="thumbnailsN" /> <?php _e('No', 'slideshow-gallery'); ?></label>
+				<label class="slideshow-custom-radio">
+					<input onclick="jQuery('#thumbnails_div').show();" <?php echo ($this -> get_option('thumbnails') == "Y") ? 'checked="checked"' : ''; ?> type="radio" name="thumbnails" value="Y" id="thumbnailsY" />
+					<span><?php _e('Yes', 'slideshow-gallery'); ?></span>
+				</label>
+				<label class="slideshow-custom-radio">
+					<input onclick="jQuery('#thumbnails_div').hide();" <?php echo ($this -> get_option('thumbnails') == "N") ? 'checked="checked"' : ''; ?> type="radio" name="thumbnails" value="N" id="thumbnailsN" />
+					<span><?php _e('No', 'slideshow-gallery'); ?></span>
+				</label>
 				<span class="howto"><?php _e('Should the thumbnails bar be shown for slides?', 'slideshow-gallery'); ?></span>
 			</td>
 		</tr>
@@ -436,8 +490,14 @@ $thumbhideonmobile = $this -> get_option ('thumbhideonmobile');
 				<th><label for="thubmpositionbottom"><?php _e('Thumbnails Position', 'slideshow-gallery'); ?></label>
 				<?php echo $this -> Html -> help(__('With the thumbnails turned on with the setting above, you can now specify the position of the thumbnail bar/slider. Either above or below the slideshow is available.', 'slideshow-gallery')); ?></th>
 				<td>
-					<label><input <?php echo ($this -> get_option('thumbposition') == "top") ? 'checked="checked"' : ''; ?> type="radio" name="thumbposition" value="top" id="thumbpositiontop" /> <?php _e('Top', 'slideshow-gallery'); ?></label>
-					<label><input <?php echo ($this -> get_option('thumbposition') == "bottom") ? 'checked="checked"' : ''; ?> type="radio" name="thumbposition" value="bottom" id="thumbpositionbottom" /> <?php _e('Bottom', 'slideshow-gallery'); ?></label>
+					<label class="slideshow-custom-radio">
+						<input <?php echo ($this -> get_option('thumbposition') == "top") ? 'checked="checked"' : ''; ?> type="radio" name="thumbposition" value="top" id="thumbpositiontop" />
+						<span><?php _e('Top', 'slideshow-gallery'); ?></span>
+					</label>
+					<label class="slideshow-custom-radio">
+						<input <?php echo ($this -> get_option('thumbposition') == "bottom") ? 'checked="checked"' : ''; ?> type="radio" name="thumbposition" value="bottom" id="thumbpositionbottom" />
+						<span><?php _e('Bottom', 'slideshow-gallery'); ?></span>
+					</label>
 					<span class="howto"><?php _e('Choose your preferred position of the thumbnails bar relative to the slideshow images.', 'slideshow-gallery'); ?></span>
 				</td>
 			</tr>
@@ -511,7 +571,11 @@ $thumbhideonmobile = $this -> get_option ('thumbhideonmobile');
 				<th><label for="thumbhideonmobile"><?php _e('Hide On Mobile', 'slideshow-gallery'); ?></label>
 				<?php echo $this -> Html -> help(__('With a responsive layout turned on, the slideshow will respond in width on mobile devices. You can tick/check this setting to hide the thumbnail bar.', 'slideshow-gallery')); ?></th>
 				<td>
-					<label><input <?php echo (!$this -> ci_serial_valid()) ? 'disabled="disabled"' : ''; ?> <?php echo (!empty($thumbhideonmobile) && $this -> ci_serial_valid()) ? 'checked="checked"' : ''; ?> type="checkbox" name="thumbhideonmobile" value="1" id="thumbhideonmobile" /> <?php _e('Yes, hide the thumbnail bar on mobiles', 'slideshow-gallery'); ?> <?php if (!$this -> ci_serial_valid()) { echo sprintf(__('(%s)', 'slideshow-gallery'), '<a href="' . admin_url('admin.php?page=' . $this -> sections -> lite_upgrade) . '">' . __('Pro Version Only', 'slideshow-gallery') . '</a>'); } ?></label>
+					<label class="slideshow-custom-checkbox">
+						<input <?php echo (!$this -> ci_serial_valid()) ? 'disabled="disabled"' : ''; ?> <?php echo (!empty($thumbhideonmobile) && $this -> ci_serial_valid()) ? 'checked="checked"' : ''; ?> type="checkbox" name="thumbhideonmobile" value="1" id="thumbhideonmobile" />
+						<span class="check-icon"></span>
+						<?php _e('Yes, hide the thumbnail bar on mobiles', 'slideshow-gallery'); ?> <?php if (!$this -> ci_serial_valid()) { echo sprintf(__('(%s)', 'slideshow-gallery'), '<a href="' . admin_url('admin.php?page=' . $this -> sections -> lite_upgrade) . '">' . __('Pro Version Only', 'slideshow-gallery') . '</a>'); } ?>
+					</label>
 					<span class="howto"><?php _e('Tick/check this to hide the thumbnail bar on mobiles', 'slideshow-gallery'); ?></span>
 				</td>
 			</tr>

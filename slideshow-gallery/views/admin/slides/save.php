@@ -112,11 +112,23 @@ if ($this -> language_do()) {
 				<tr>
 					<th><label for="showinfo_both"><?php _e('Show Information?', 'slideshow-gallery'); ?></label>
 					<?php echo $this -> Html -> help(__('You can choose to show both title and description, only title, only description or not show the information bar at all. Please note that this setting is only effective when the information bar is turned on in settings or via a parameter in shortcode or hardcode.', 'slideshow-gallery')); ?></th>
-					<td>
-						<label><input onclick="jQuery('#showinfo_div').show();" <?php echo ((empty($showinfo)) || (!empty($showinfo) && $showinfo == "both")) ? 'checked="checked"' : ''; ?> type="radio" name="Slide[showinfo]" value="both" id="showinfo_both" /> <?php _e('Both title and description', 'slideshow-gallery'); ?></label><br/>
-						<label><input onclick="jQuery('#showinfo_div').show();" <?php echo (!empty($showinfo) && $showinfo == "title") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[showinfo]" value="title" id="showinfo_title" /> <?php _e('Title only', 'slideshow-gallery'); ?></label><br/>
-						<label><input onclick="jQuery('#showinfo_div').show();" <?php echo (!empty($showinfo) && $showinfo == "description") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[showinfo]" value="description" id="showinfo_description" /> <?php _e('Description only', 'slideshow-gallery'); ?></label><br/>
-						<label><input onclick="jQuery('#showinfo_div').hide();" <?php echo (!empty($showinfo) && $showinfo == "none") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[showinfo]" value="none" id="showinfo_none" /> <?php _e('None, do not show', 'slideshow-gallery'); ?></label>
+					<td class="slideshow-custom-vertical-list">
+						<label class="slideshow-custom-radio">
+							<input onclick="jQuery('#showinfo_div').show();" <?php echo ((empty($showinfo)) || (!empty($showinfo) && $showinfo == "both")) ? 'checked="checked"' : ''; ?> type="radio" name="Slide[showinfo]" value="both" id="showinfo_both" />
+							<span><?php _e('Both title and description', 'slideshow-gallery'); ?></span>
+						</label>
+						<label class="slideshow-custom-radio">
+							<input onclick="jQuery('#showinfo_div').show();" <?php echo (!empty($showinfo) && $showinfo == "title") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[showinfo]" value="title" id="showinfo_title" />
+							<span><?php _e('Title only', 'slideshow-gallery'); ?></span>
+						</label>
+						<label class="slideshow-custom-radio">
+							<input onclick="jQuery('#showinfo_div').show();" <?php echo (!empty($showinfo) && $showinfo == "description") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[showinfo]" value="description" id="showinfo_description" />
+							<span><?php _e('Description only', 'slideshow-gallery'); ?></span>
+						</label>
+						<label class="slideshow-custom-radio">
+							<input onclick="jQuery('#showinfo_div').hide();" <?php echo (!empty($showinfo) && $showinfo == "none") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[showinfo]" value="none" id="showinfo_none" />
+							<span><?php _e('None, do not show', 'slideshow-gallery'); ?></span>
+						</label>
 						<span class="howto"><?php _e('Choose how the information bar will be displayed on this slide.', 'slideshow-gallery'); ?></span>
 					</td>
 				</tr>
@@ -143,11 +155,19 @@ if ($this -> language_do()) {
 				<tr>
 					<th><label for="checkboxall"><?php _e('Galleries', 'slideshow-gallery'); ?></label>
 					<?php echo $this -> Html -> help(__('You can organize/assign a slide to multiple galleries as needed. It is easy to display a slideshow with the slides of a specific gallery then.', 'slideshow-gallery')); ?></th>
-					<td>
+					<td class="slideshow-custom-vertical-list">
 						<?php if ($galleries = $this -> Gallery() -> select()) : ?>
-							<label style="font-weight:bold"><input onclick="jqCheckAll(this,'','Slide[galleries]');" type="checkbox" name="checkboxall" value="checkboxall" id="checkboxall" /> <?php _e('Select All', 'slideshow-gallery'); ?></label><br/>
+							<label class="slideshow-custom-checkbox" style="font-weight:bold">
+								<input onclick="jqCheckAll(this,'','Slide[galleries]');" type="checkbox" name="checkboxall" value="checkboxall" id="checkboxall" />
+								<span class="check-icon"></span>
+								<?php _e('Select All', 'slideshow-gallery'); ?>
+							</label>
 							<?php foreach ($galleries as $gallery_id => $gallery_title) : ?>
-								<label><input <?php echo (!empty($this -> Slide() -> data -> galleries) && in_array($gallery_id, $this -> Slide() -> data -> galleries)) ? 'checked="checked"' : ''; ?> type="checkbox" name="Slide[galleries][]" value="<?php echo esc_attr($gallery_id); ?>" id="Slide_galleries_<?php echo esc_html($gallery_id); ?>" /> <?php echo esc_html($gallery_title); ?></label><br/>
+								<label class="slideshow-custom-checkbox">
+									<input <?php echo (!empty($this -> Slide() -> data -> galleries) && in_array($gallery_id, $this -> Slide() -> data -> galleries)) ? 'checked="checked"' : ''; ?> type="checkbox" name="Slide[galleries][]" value="<?php echo esc_attr($gallery_id); ?>" id="Slide_galleries_<?php echo esc_html($gallery_id); ?>" />
+									<span class="check-icon"></span>
+									<?php echo esc_html($gallery_title); ?>
+								</label>
 							<?php endforeach; ?>
 						<?php else : ?>
 							<span class="error"><?php _e('No galleries are available.', 'slideshow-gallery'); ?></span>
@@ -159,9 +179,18 @@ if ($this -> language_do()) {
                 	<th><label for="Slide.type.media"><?php _e('Image Type', 'slideshow-gallery'); ?></label>
                 	<?php echo $this -> Html -> help(__('Do you want to specify a URL to your image or upload the image file manually? Specifying a URL will still copy the image file remotely from the location to your server so uploading is recommended to prevent any restrictions or errors.', 'slideshow-gallery')); ?></th>
                     <td>
-                    	<label><input onclick="jQuery('#typediv_media').show(); jQuery('#typediv_file').hide(); jQuery('#typediv_url').hide();" <?php echo (empty($type) || $type == "media") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[type]" value="media" id="Slide.type.media" /> <?php _e('Media Upload', 'slideshow-gallery'); ?></label>
-                    	<label><input onclick="jQuery('#typediv_file').show(); jQuery('#typediv_media').hide(); jQuery('#typediv_url').hide();" <?php echo ($type == "file") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[type]" value="file" id="Slide.type.file" /> <?php _e('Upload File', 'slideshow-gallery'); ?></label>
-                        <label><input onclick="jQuery('#typediv_url').show(); jQuery('#typediv_media').hide(); jQuery('#typediv_file').hide();" <?php echo ($type == "url") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[type]" value="url" id="Slide.type.url" /> <?php _e('Specify URL', 'slideshow-gallery'); ?></label>
+                    	<label class="slideshow-custom-radio">
+							<input onclick="jQuery('#typediv_media').show(); jQuery('#typediv_file').hide(); jQuery('#typediv_url').hide();" <?php echo (empty($type) || $type == "media") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[type]" value="media" id="Slide.type.media" />
+							<span><?php _e('Media Upload', 'slideshow-gallery'); ?></span>
+						</label>
+                    	<label class="slideshow-custom-radio">
+							<input onclick="jQuery('#typediv_file').show(); jQuery('#typediv_media').hide(); jQuery('#typediv_url').hide();" <?php echo ($type == "file") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[type]" value="file" id="Slide.type.file" />
+							<span><?php _e('Upload File', 'slideshow-gallery'); ?></span>
+						</label>
+                        <label class="slideshow-custom-radio">
+							<input onclick="jQuery('#typediv_url').show(); jQuery('#typediv_media').hide(); jQuery('#typediv_file').hide();" <?php echo ($type == "url") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[type]" value="url" id="Slide.type.url" />
+							<span><?php _e('Specify URL', 'slideshow-gallery'); ?></span>
+						</label>
                         <?php echo (!empty($this -> Slide() -> errors['type'])) ? '<div class="slideshow_error">' . $this -> Slide() -> errors['type'] . '</div>' : ''; ?>
                         <span class="howto"><?php _e('Do you want to upload an image or specify a local/remote image URL?', 'slideshow-gallery'); ?></span>
                     </td>
@@ -290,8 +319,14 @@ if ($this -> language_do()) {
 					<th><label for="Slide_uselink_N"><?php _e('Use Link', 'slideshow-gallery'); ?></label>
 					<?php echo $this -> Html -> help(__('Turn this on to specify a link/URL for this slide to link to when it is clicked.', 'slideshow-gallery')); ?></th>
 					<td>
-						<label><input onclick="jQuery('#Slide_uselink_div').show();" <?php echo ($uselink == "Y") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[uselink]" value="Y" id="Slide_uselink_Y" /> <?php _e('Yes', 'slideshow-gallery'); ?></label>
-						<label><input onclick="jQuery('#Slide_uselink_div').hide();" <?php echo (empty($uselink) || $uselink == "N") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[uselink]" value="N" id="Slide_uselink_N" /> <?php _e('No', 'slideshow-gallery'); ?></label>
+						<label class="slideshow-custom-radio">
+							<input onclick="jQuery('#Slide_uselink_div').show();" <?php echo ($uselink == "Y") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[uselink]" value="Y" id="Slide_uselink_Y" />
+							<span><?php _e('Yes', 'slideshow-gallery'); ?></span>
+						</label>
+						<label class="slideshow-custom-radio">
+							<input onclick="jQuery('#Slide_uselink_div').hide();" <?php echo (empty($uselink) || $uselink == "N") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[uselink]" value="N" id="Slide_uselink_N" />
+							<span><?php _e('No', 'slideshow-gallery'); ?></span>
+						</label>
                         <span class="howto"><?php _e('Set this to Yes to link this slide to a link/URL of your choice.', 'slideshow-gallery'); ?></span>
 					</td>
 				</tr>
@@ -336,8 +371,14 @@ if ($this -> language_do()) {
 						<th><label for="Slide_linktarget_self"><?php _e('Link Target', 'slideshow-gallery'); ?></label>
 						<?php echo $this -> Html -> help(__('Depending on the purpose of specifying this link, you may want it to open in the same window or in a new window.', 'slideshow-gallery')); ?></th>
 						<td>
-							<label><input <?php echo (empty($linktarget) || (!empty($linktarget) && $linktarget == "self")) ? 'checked="checked"' : ''; ?> type="radio" name="Slide[linktarget]" value="self" id="Slide_linktarget_self" /> <?php _e('Current Window', 'slideshow-gallery'); ?></label>
-							<label><input <?php echo (!empty($linktarget) && $linktarget == "blank") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[linktarget]" value="blank" id="Slide_linktarget_blank" /> <?php _e('New/Blank Window', 'slideshow-gallery'); ?></label>
+							<label class="slideshow-custom-radio">
+								<input <?php echo (empty($linktarget) || (!empty($linktarget) && $linktarget == "self")) ? 'checked="checked"' : ''; ?> type="radio" name="Slide[linktarget]" value="self" id="Slide_linktarget_self" />
+								<span><?php _e('Current Window', 'slideshow-gallery'); ?></span>
+							</label>
+							<label class="slideshow-custom-radio">
+								<input <?php echo (!empty($linktarget) && $linktarget == "blank") ? 'checked="checked"' : ''; ?> type="radio" name="Slide[linktarget]" value="blank" id="Slide_linktarget_blank" />
+								<span><?php _e('New/Blank Window', 'slideshow-gallery'); ?></span>
+							</label>
 							<span class="howto"><?php _e('Should this link open in the current window or a new window?', 'slideshow-gallery'); ?></span>
 						</td>
 					</tr>
@@ -377,7 +418,11 @@ if ($this -> language_do()) {
 				<i class="fa fa-check fa-fw"></i> <?php _e('Save Slide', 'slideshow-gallery'); ?>
 			</button>
 			<div class="slideshow_continueediting">
-				<label><input <?php echo (!empty($_REQUEST['continueediting'])) ? 'checked="checked"' : ''; ?> type="checkbox" name="continueediting" value="1" id="continueediting" /> <?php _e('Continue editing', 'slideshow-gallery'); ?></label>
+				<label class="slideshow-custom-checkbox">
+					<input <?php echo (!empty($_REQUEST['continueediting'])) ? 'checked="checked"' : ''; ?> type="checkbox" name="continueediting" value="1" id="continueediting" />
+					<span class="check-icon"></span>
+					<?php _e('Continue editing', 'slideshow-gallery'); ?>
+				</label>
 			</div>
 		</p>
 	</form>

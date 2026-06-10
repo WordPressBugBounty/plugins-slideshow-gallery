@@ -31,15 +31,25 @@ $thumbactive = (isset($styles['thumbactive']) ? (empty($styles['thumbactive']  )
 			<th><label for="layout_responsive"><?php _e('Layout', 'slideshow-gallery'); ?></label>
 			<?php echo $this -> Html -> help(__('Choose responsive if you have a responsive theme and you want the slideshow to resize width/height in a responsive manner on different devices.<br/><br/><strong>Override per slideshow:</strong> Using parameter <code>layout</code> with value <code>responsive</code> or <code>specific</code> eg. <code>[tribulant_slideshow layout="specific"]</code>.', 'slideshow-gallery')); ?></th>
 			<td>
-				<label><input onclick="jQuery('#layout_specific_div').hide(); jQuery('#layout_responsive_div').show();" <?php echo ($styles['layout'] == "responsive") ? 'checked="checked"' : ''; ?> <?php echo (!$this -> ci_serial_valid()) ? 'disabled="disabled"' : ''; ?> type="radio" name="styles[layout]" value="responsive" id="layout_responsive" /> <?php _e('Responsive', 'slideshow-gallery'); ?> <?php if (!$this -> ci_serial_valid()) { echo sprintf(__('(%s)', 'slideshow-gallery'), '<a href="' . admin_url('admin.php?page=' . $this -> sections -> lite_upgrade) . '">' . __('Pro Version Only', 'slideshow-gallery') . '</a>'); } ?></label>
-				<label><input onclick="jQuery('#layout_specific_div').show(); jQuery('#layout_responsive_div').hide();" <?php echo (empty($styles['layout']) || $styles['layout'] == "specific" || !$this -> ci_serial_valid()) ? 'checked="checked"' : ''; ?> type="radio" name="styles[layout]" value="specific" id="layout_specific" /> <?php _e('Fixed', 'slideshow-gallery'); ?></label>
+				<label class="slideshow-custom-radio">
+					<input onclick="jQuery('#layout_specific_div').hide(); jQuery('#layout_responsive_div').show();" <?php echo ($styles['layout'] == "responsive") ? 'checked="checked"' : ''; ?> <?php echo (!$this -> ci_serial_valid()) ? 'disabled="disabled"' : ''; ?> type="radio" name="styles[layout]" value="responsive" id="layout_responsive" />
+					<span><?php _e('Responsive', 'slideshow-gallery'); ?> <?php if (!$this -> ci_serial_valid()) { echo sprintf(__('(%s)', 'slideshow-gallery'), '<a href="' . admin_url('admin.php?page=' . $this -> sections -> lite_upgrade) . '">' . __('Pro Version Only', 'slideshow-gallery') . '</a>'); } ?></span>
+				</label>
+				<label class="slideshow-custom-radio">
+					<input onclick="jQuery('#layout_specific_div').show(); jQuery('#layout_responsive_div').hide();" <?php echo (empty($styles['layout']) || $styles['layout'] == "specific" || !$this -> ci_serial_valid()) ? 'checked="checked"' : ''; ?> type="radio" name="styles[layout]" value="specific" id="layout_specific" />
+					<span><?php _e('Fixed', 'slideshow-gallery'); ?></span>
+				</label>
 				<span class="howto"><?php _e('Choose whether you want a responsive or fixed/specific layout for the slideshow.', 'slideshow-gallery'); ?></span>
 			</td>
 		</tr>
 		<tr>
 			<th><label for="autoheight"><?php _e('Auto Height', 'slideshow-gallery'); ?></label></th>
 			<td>
-				<label><input onclick="if (jQuery(this).is(':checked')) { jQuery('#autoheight_div').show(); jQuery('#styles_height').attr('disabled', 'disabled'); } else { jQuery('#autoheight_div').hide(); jQuery('#styles_height').removeAttr('disabled'); }" <?php echo (!empty($autoheight)) ? 'checked="checked"' : ''; ?> type="checkbox" name="autoheight" value="1" id="autoheight" /> <?php _e('Yes, automatically adjust the slideshow height for each slide', 'slideshow-gallery'); ?></label>
+				<label class="slideshow-custom-checkbox">
+					<input onclick="if (jQuery(this).is(':checked')) { jQuery('#autoheight_div').show(); jQuery('#styles_height').attr('disabled', 'disabled'); } else { jQuery('#autoheight_div').hide(); jQuery('#styles_height').removeAttr('disabled'); }" <?php echo (!empty($autoheight)) ? 'checked="checked"' : ''; ?> type="checkbox" name="autoheight" value="1" id="autoheight" />
+					<span class="check-icon"></span>
+					<?php _e('Yes, automatically adjust the slideshow height for each slide', 'slideshow-gallery'); ?>
+				</label>
 			</td>
 		</tr>
 	</tbody>
@@ -84,8 +94,14 @@ $thumbactive = (isset($styles['thumbactive']) ? (empty($styles['thumbactive']  )
 			<th><label for="styles.resizeimages"><?php _e('Resize Images', 'slideshow-gallery'); ?></label>
 			<?php echo $this -> Html -> help(__('Should images be automatically resized? If you specify No, the images will be used in the slideshow as you originally upload them. If you specify Yes, the images will be cropped/resized to fit the slideshow better which is the recommended setting.', 'slideshow-gallery')); ?></th>
 			<td>
-				<label><input onclick="jQuery('#resizeimages_div').show();" <?php echo (empty($styles['resizeimages']) || $styles['resizeimages'] == "Y") ? 'checked="checked"' : ''; ?> type="radio" name="styles[resizeimages]" value="Y" id="styles.resizeimages_Y" /> <?php _e('Yes', 'slideshow-gallery'); ?></label>
-				<label><input onclick="jQuery('#resizeimages_div').hide();" <?php echo ($styles['resizeimages'] == "N") ? 'checked="checked"' : ''; ?> type="radio" name="styles[resizeimages]" value="N" id="styles.resizeimages_N" /> <?php _e('No', 'slideshow-gallery'); ?></label>
+				<label class="slideshow-custom-radio">
+					<input onclick="jQuery('#resizeimages_div').show();" <?php echo (empty($styles['resizeimages']) || $styles['resizeimages'] == "Y") ? 'checked="checked"' : ''; ?> type="radio" name="styles[resizeimages]" value="Y" id="styles.resizeimages_Y" />
+					<span><?php _e('Yes', 'slideshow-gallery'); ?></span>
+				</label>
+				<label class="slideshow-custom-radio">
+					<input onclick="jQuery('#resizeimages_div').hide();" <?php echo ($styles['resizeimages'] == "N") ? 'checked="checked"' : ''; ?> type="radio" name="styles[resizeimages]" value="N" id="styles.resizeimages_N" />
+					<span><?php _e('No', 'slideshow-gallery'); ?></span>
+				</label>
 				<span class="howto"><?php _e('Should images be resized proportionally to fit the width of the slideshow area?', 'slideshow-gallery'); ?></span>
 			</td>
 		</tr>
@@ -98,8 +114,14 @@ $thumbactive = (isset($styles['thumbactive']) ? (empty($styles['thumbactive']  )
 			<tr>
 				<th><label for="resizeimagescrop_Y"><?php _e('Crop', 'slideshow-gallery'); ?></label></th>
 				<td>
-					<label><input <?php echo (!empty($resizeimagescrop) && $resizeimagescrop == "Y") ? 'checked="checked"' : ''; ?> type="radio" name="resizeimagescrop" value="Y" id="resizeimagescrop_Y" /> <?php _e('Yes', 'slideshow-gallery'); ?></label>
-					<label><input <?php echo (!empty($resizeimagescrop) && $resizeimagescrop == "N") ? 'checked="checked"' : ''; ?> type="radio" name="resizeimagescrop" value="N" id="resizeimagescrop_N" /> <?php _e('No', 'slideshow-gallery'); ?></label>
+					<label class="slideshow-custom-radio">
+						<input <?php echo (!empty($resizeimagescrop) && $resizeimagescrop == "Y") ? 'checked="checked"' : ''; ?> type="radio" name="resizeimagescrop" value="Y" id="resizeimagescrop_Y" />
+						<span><?php _e('Yes', 'slideshow-gallery'); ?></span>
+					</label>
+					<label class="slideshow-custom-radio">
+						<input <?php echo (!empty($resizeimagescrop) && $resizeimagescrop == "N") ? 'checked="checked"' : ''; ?> type="radio" name="resizeimagescrop" value="N" id="resizeimagescrop_N" />
+						<span><?php _e('No', 'slideshow-gallery'); ?></span>
+					</label>
 					<span class="howto"><?php _e('Should images be cropped?', 'slideshow-gallery'); ?></span>
 				</td>
 			</tr>

@@ -3,8 +3,8 @@ Contributors: contrid
 Donate link: https://tribulant.com/
 Tags: wordpress plugins, wordpress slideshow gallery, slides, slideshow, image gallery, images, gallery, featured content, content gallery, javascript, javascript slideshow, slideshow gallery
 Requires at least: 3.1
-Tested up to: 6.8.3
-Stable tag: 1.8.5
+Tested up to: 7.0
+Stable tag: 1.8.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -189,6 +189,12 @@ There is an "Images Tester" utility under Slideshow > Settings on the right-hand
 == Changelog ==
 
 See all <a href="https://tribulant.com/docs/wordpress-slideshow-gallery/1758/#doc3">releases and full changelogs</a> in our docs.
+
+= 1.8.6 =
+* IMPROVE: Radio buttons and checkboxes styling.
+* FIX: 'menu_order' issue in the slideshow.
+* FIX: 'exclude' attribute handling in the shortcode.
+* FIX: Stored Cross-Site Scripting (XSS) vulnerability in the 'alwaysauto' shortcode attribute. Added input validation and proper JavaScript escaping to prevent injection attacks.
 
 = 1.8.5 =
 * IMPROVE: Responsive images are able to get resized now.

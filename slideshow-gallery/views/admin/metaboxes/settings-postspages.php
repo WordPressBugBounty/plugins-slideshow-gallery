@@ -20,7 +20,11 @@ $excerpt_length = $this -> get_option('excerpt_length');
 		<tr>
 			<th><label for="excerptsettings"><?php _e('Override Excerpt Settings', 'slideshow-gallery'); ?></label></th>
 			<td>
-				<label><input <?php echo (!$this -> ci_serial_valid()) ? 'disabled="disabled"' : ''; ?> <?php echo (!empty($excerptsettings)) ? 'checked="checked"' : ''; ?> onclick="if (jQuery(this).is(':checked')) { jQuery('#excerptsettings_div').show(); } else { jQuery('#excerptsettings_div').hide(); }" type="checkbox" name="excerptsettings" value="1" id="excerptsettings" /> <?php _e('Yes, override the post/page excerpt settings', 'slideshow-gallery'); ?> <?php if (!$this -> ci_serial_valid()) { echo sprintf(__('(%s)', 'slideshow-gallery'), '<a href="' . admin_url('admin.php?page=' . $this -> sections -> lite_upgrade) . '">' . __('Pro Version Only', 'slideshow-gallery') . '</a>'); } ?></label>
+				<label class="slideshow-custom-checkbox">
+					<input <?php echo (!$this -> ci_serial_valid()) ? 'disabled="disabled"' : ''; ?> <?php echo (!empty($excerptsettings)) ? 'checked="checked"' : ''; ?> onclick="if (jQuery(this).is(':checked')) { jQuery('#excerptsettings_div').show(); } else { jQuery('#excerptsettings_div').hide(); }" type="checkbox" name="excerptsettings" value="1" id="excerptsettings" />
+					<span class="check-icon"></span>
+					<?php _e('Yes, override the post/page excerpt settings', 'slideshow-gallery'); ?> <?php if (!$this -> ci_serial_valid()) { echo sprintf(__('(%s)', 'slideshow-gallery'), '<a href="' . admin_url('admin.php?page=' . $this -> sections -> lite_upgrade) . '">' . __('Pro Version Only', 'slideshow-gallery') . '</a>'); } ?>
+				</label>
 			</td>
 		</tr>
 	</tbody>

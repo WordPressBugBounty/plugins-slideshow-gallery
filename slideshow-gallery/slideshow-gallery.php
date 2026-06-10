@@ -5,7 +5,7 @@ Plugin URI: https://tribulant.com/plugins/view/13/
 Author: Tribulant
 Author URI: https://tribulant.com
 Description: Feature content in a JavaScript powered slideshow gallery showcase on your WordPress website. The slideshow is flexible and all aspects can easily be configured. Embedding or hardcoding the slideshow gallery is a breeze. See the <a href="https://tribulant.com/docs/wordpress-slideshow-gallery/1758/" target="_blank">online documentation</a> for instructions on using and embedding slideshow galleries. Upgrade to the premium version to remove all limitations.
-Version: 1.8.5
+Version: 1.8.6
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: slideshow gallery, slideshow, gallery, slider, jquery, bfithumb, galleries, photos, images
@@ -283,8 +283,11 @@ if (!class_exists('SlideshowGallery')) {
 		}
 		
 		function default_hidden_columns($hidden = null, $screen = null) {			
-			if ($current_screen = get_current_screen()) {												
-				if (($current_screen -> id == $this -> menus['slideshow-slides']) || ($current_screen -> id == $this -> menus['slideshow-galleries'])) {					
+			if ($current_screen = get_current_screen()) {		
+				$slideshow_slides = ! empty( $this -> menus['slideshow-slides']) ?  $this -> menus['slideshow-slides'] : '';										
+				$slideshow_galleries = ! empty( $this -> menus['slideshow-galleries']) ?  $this -> menus['slideshow-galleries'] : '';
+
+				if (($current_screen -> id == $slideshow_slides) || ($current_screen -> id == $slideshow_galleries)) {					
 					switch ($screen -> id) {
 						case $this -> menus['slideshow-slides']			:
 							$hidden = array(
@@ -559,12 +562,17 @@ if (!class_exists('SlideshowGallery')) {
 		        }
 		    }
 		    
-            if (!in_array($s['orderby'], ['id', 'date', 'name', 'type', 'created' , 'order' , 'random'], true)) {
+            if (!in_array($s['orderby'], ['id', 'date', 'name', 'type', 'created' , 'order' , 'random', 'menu_order'], true)) {
                 $s['orderby'] = array('order', "ASC"); // Default fallback
             }
 
+		    // Validate alwaysauto to only accept 'true' or 'false'
+		    if (!in_array($s['alwaysauto'], ['true', 'false'], true)) {
+		        $s['alwaysauto'] = 'true'; // Default fallback
+		    }
+		
 		    // Additional validation based on the context
-		    if (!in_array($s['orderf'], ['id', 'date', 'name', 'type', 'created', 'order'], true)) {
+		    if (!in_array($s['orderf'], ['id', 'date', 'name', 'type', 'created', 'order', 'menu_order'], true)) {
 		        $s['orderf'] = 'order'; // Default fallback
 		    }
 
@@ -692,6 +700,10 @@ if (!class_exists('SlideshowGallery')) {
 				}
 				
 				$slides = $this -> Slide() -> find_all(null, null, $orderby);
+
+				if (!empty($exclude)) {
+					$exclude = array_map('trim', explode(',', $exclude));
+				}
 				
 				if (!empty($slides)) {
 					foreach ($slides as $slide_key => $slide) {
@@ -750,7 +762,7 @@ if (!class_exists('SlideshowGallery')) {
 								//$attachments[$id] = (object) array_map('esc_attr', (array) $attachment);
 								
 								$a++;
-								if (in_array($a, $exclude)) {
+								if (in_array($id, $exclude)) {
 									unset($attachments[$id]);
 								}
 							}
